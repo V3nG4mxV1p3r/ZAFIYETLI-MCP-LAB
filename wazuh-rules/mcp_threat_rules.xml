@@ -1,0 +1,19 @@
+<group name="mcp_security, agent_attacks">
+  <!-- Ana JSON loglarını yakalayan temel kural -->
+  <rule id="100010" level="3">
+    <decoded_as>json</decoded_as>
+    <field name="app_name">mcp-server</field>
+    <description>MCP Sunucusu olay logu alındı.</description>
+  </rule>
+
+  <!-- Zararlı payload tespit kuralı (Command Injection) -->
+  <rule id="100011" level="12">
+    <if_sid>100010</if_sid>
+    <field name="action">network_diag_called</field>
+    <match field="payload">;|&amp;|\||cat |whoami|wget |curl </match>
+    <description>Kritik: MCP Ajanı üzerinden potansiyel Command Injection / Dolaylı Prompt Injection saldırısı tespit edildi!</description>
+    <mitre>
+      <id>T1059</id>
+    </mitre>
+  </rule>
+</group>

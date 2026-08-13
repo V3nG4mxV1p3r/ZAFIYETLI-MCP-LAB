@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  mcp-server:
+    build: ./mcp-server
+    container_name: vulnerable-mcp-server
+    ports:
+      - "8000:8000"
+    volumes:
+      - mcp-logs:/var/log/mcp  # Tehdit avcılığı ve Wazuh entegrasyonu LOG KAYIT
+
+  agent-client:
+    build: ./agent-client
+    container_name: mcp-agent-client
+    depends_on:
+      - mcp-server
+    environment:
+      - MCP_SERVER_URL=http://mcp-server:8000
+
+volumes:
+  mcp-logs:
