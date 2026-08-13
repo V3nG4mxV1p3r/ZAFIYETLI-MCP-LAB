@@ -19,6 +19,7 @@ Bu laboratuvar, sadece zafiyet sömürmeyi değil, aynı zamanda Mavi Takım (Bl
 
 ## 1. Laboratuvarı Ayağa Kaldırma
 Bilgisayarınızda Docker ve Docker Compose kurulu olduğundan emin olun. Repoyu klonladıktan sonra ana dizinde şu komutu çalıştırın:
+
 `bash
 docker compose up --build -d
 `
@@ -26,6 +27,7 @@ docker compose up --build -d
 ---
 ## 2. Kırmızı Takım: Sistemi Sömürme
 **Ajan konteynerinin içine girerek saldırı senaryosunu başlatın:**
+
 `bash
 docker exec -it mcp-agent-client python client.py
 `
@@ -37,6 +39,7 @@ docker exec -it mcp-agent-client python client.py
 
 ## 3. Mavi Takım: Log İnceleme ve Tespit
 **Saldırı sonrası, sunucunun arka planda ürettiği güvenlik loglarını inceleyin:**
+
 `bash
 docker exec -it vulnerable-mcp-server cat /var/log/mcp/mcp_audit.log
 `
@@ -47,6 +50,7 @@ docker exec -it vulnerable-mcp-server cat /var/log/mcp/mcp_audit.log
 
 ## Sistemi Temizleme
 **Laboratuvarı kapatmak ve üretilen logları (volume dahil) temizlemek için:**
+
 `bash
 docker compose down -v
 `
